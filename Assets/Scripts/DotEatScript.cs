@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class DotEatScript : MonoBehaviour
 {
+    public Text gameOverText;
+    public GameController gameController;
+    
     private Tilemap dotmap;
     private int numDots;
     
@@ -39,7 +43,10 @@ public class DotEatScript : MonoBehaviour
             Debug.Log("numDots: " + numDots);
             
             if (numDots == 0)
-                Debug.Log("CONGRATULATIONS");
+            {
+                gameOverText.text = "WELL DONE";
+                gameController.ShowGameOver(true);
+            }
         }
     }
 }
