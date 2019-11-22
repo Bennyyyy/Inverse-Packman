@@ -23,9 +23,12 @@ public class PathCalculator : MonoBehaviour
         HashSet<Node> checkedNodes = new HashSet<Node>();
         HashSet<Node> toCheckNodes = new HashSet<Node>();
 
+        toCheckNodes.Add(startNode);
+
         // As long as there are nodes which could lead to the target...
         while (toCheckNodes.Count > 0)
         {
+            Debug.Log("Nodes left: " + toCheckNodes.Count);
             Node bestNode = FindBestNode(toCheckNodes);
 
             if (bestNode.Coords == target)
@@ -44,7 +47,8 @@ public class PathCalculator : MonoBehaviour
         throw new Exception("No path to target!");
     }
 
-    private void HandleNeighbors(Node currentNode, HashSet<Node> neighbors, HashSet<Node> checkedNodes, HashSet<Node> toCheckNodes)
+    private void HandleNeighbors(Node currentNode, HashSet<Node> neighbors, HashSet<Node> checkedNodes,
+        HashSet<Node> toCheckNodes)
     {
         foreach (var neighbor in neighbors)
         {
@@ -59,13 +63,11 @@ public class PathCalculator : MonoBehaviour
                 // We should  check the paths going through here!
                 toCheckNodes.Add(neighbor);
             }
-            
+
             Debug.Log("New neighbor: " + neighbor.Coords.ToString());
 
             neighbor.Previous = currentNode;
             neighbor.CostToReach = currentNode.CostToReach + 1;
-            
-
         }
     }
 
@@ -81,10 +83,21 @@ public class PathCalculator : MonoBehaviour
 
         foreach (var possibleNeighbor in possibleNeighbors)
         {
+            Debug.Log("Possible Neighbot: " + possibleNeighbor.ToString());
             TileBase tile = walls.GetTile(possibleNeighbor);
-            if (tile != null && tile.name != "wall")
+            
+            // TODO: Sth. broken here. All tiles are null?
+            if (tile == null)
             {
-                results.Add(new Node(possibleNeighbor));
+                Debug.Log("--> Tile: is null.");
+            }
+            else
+            {
+                if (tile.name != "wall")
+                {
+                    Debug.Log("--> Tile is not null.");
+                    results.Add(new Node(possibleNeighbor));
+                }
             }
         }
 
@@ -120,14 +133,15 @@ public class PathCalculator : MonoBehaviour
     private class Node
     {
         public Vector3Int Coords { get; }
-        public Node Previous { get; set;  }
+        public Node Previous { get; set; }
         public int CostToReach { set; get; }
+
         public Node(Vector3Int coords)
         {
             Coords = coords;
         }
 
-        
+
         // generated:
         protected bool Equals(Node other)
         {
@@ -146,6 +160,7 @@ public class PathCalculator : MonoBehaviour
         {
             return Coords.GetHashCode();
         }
+
         // /generated
     }
 }
