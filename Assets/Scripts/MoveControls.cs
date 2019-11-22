@@ -1,25 +1,28 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MoveControls : MonoBehaviour
 {
-    public GameObject    player;
-    public float         moveSpeed        = 1.0f;
-    public MoveDirection currentDirection = MoveDirection.Idle;
+    public GameController gameController;
+    public GameObject     player;
+    public float          moveSpeed        = 1.0f;
+    public MoveDirection  currentDirection = MoveDirection.Idle;
 
     // Update is called once per frame
     private void FixedUpdate()
     {
+        if (InvertPacman.gameState != GameState.Play)
+            return;
+
         var pressedDirection = MoveDirection.Idle;
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             pressedDirection = MoveDirection.Up;
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             pressedDirection = MoveDirection.Down;
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             pressedDirection = MoveDirection.Left;
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             pressedDirection = MoveDirection.Right;
 
         if (pressedDirection != MoveDirection.Idle)
@@ -47,6 +50,12 @@ public class MoveControls : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(0, 0, -90);
                 break;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Ghost")
+            gameController.ShowGameOver(true);
     }
 }
 
