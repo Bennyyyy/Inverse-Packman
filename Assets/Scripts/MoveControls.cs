@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class MoveControls : MonoBehaviour
 {
@@ -6,6 +7,11 @@ public class MoveControls : MonoBehaviour
     public GameObject     player;
     public float          moveSpeed        = 1.0f;
     public MoveDirection  currentDirection = MoveDirection.Idle;
+
+    private void Start()
+    {
+        gameController = GameObject.FindWithTag("MainCamera").GetComponent<GameController>();
+    }
 
     // Update is called once per frame
     private void FixedUpdate()

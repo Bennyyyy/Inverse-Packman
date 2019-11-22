@@ -27,7 +27,7 @@ public class DotEatScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        GameObject player = GameObject.Find("PacMan");
+        GameObject player = GameObject.FindWithTag("Pacman");
 
         Grid grid = dotmap.layoutGrid;
         

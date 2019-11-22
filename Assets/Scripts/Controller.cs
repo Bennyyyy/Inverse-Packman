@@ -1,11 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
+public class Controller : MonoBehaviour
 {
-    public GameObject gameOverGameObject;
     public Vector3 pacManStartPosition;
 
     private GameObject       _pacMan;
@@ -13,27 +13,19 @@ public class GameController : MonoBehaviour
 
     [HideInInspector] public ResourceLoader _loader;
 
-    private void Start()
-    { 
+    // Start is called before the first frame update
+    void Start()
+    {
         _loader = gameObject.AddComponent<ResourceLoader>();
+
         Reset();
-        ShowGameOver(false);
     }
 
-    public void ShowGameOver(bool show)
+    // Update is called once per frame
+    void Update()
     {
-        gameOverGameObject.SetActive(show);
-
-        if (show)
-            InvertPacman.gameState = GameState.GameOver;
-        else
-            InvertPacman.gameState = GameState.Play;
     }
 
-    public void ResetGame()
-    {
-        SceneManager.LoadScene(0);
-    }
     public void Reset()
     {
         Destroy(_pacMan);
