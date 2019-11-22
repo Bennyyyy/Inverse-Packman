@@ -336,6 +336,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1916655249615198149, guid: 2093d50c63f5b182dab3e45f4fb9f1fc,
+        type: 3}
+      propertyPath: m_Name
+      value: Maze
+      objectReference: {fileID: 0}
     - target: {fileID: 1916655249615198146, guid: 2093d50c63f5b182dab3e45f4fb9f1fc,
         type: 3}
       propertyPath: m_Tiles.Array.data[0].second.m_TileSpriteIndex
