@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class MoveControls : MonoBehaviour
 {
@@ -29,21 +30,23 @@ public class MoveControls : MonoBehaviour
         player.transform.position += totalMovement;
     }
 
-    private Vector3 GetMoveDirectionAsVector(MoveDirection moveDirection)
+    private void Update()
     {
-        switch (moveDirection)
+        switch (currentDirection)
         {
             case MoveDirection.Left:
-                return Vector3.left;
+                transform.localRotation = Quaternion.Euler(0, 0, 180);
+                break;
             case MoveDirection.Right:
-                return Vector3.right;
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+                break;
             case MoveDirection.Up:
-                return Vector3.up;
+                transform.localRotation = Quaternion.Euler(0, 0, 90);
+                break;
             case MoveDirection.Down:
-                return Vector3.down;
+                transform.localRotation = Quaternion.Euler(0, 0, -90);
+                break;
         }
-
-        return Vector3.zero;
     }
 }
 
