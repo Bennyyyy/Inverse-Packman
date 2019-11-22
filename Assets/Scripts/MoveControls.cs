@@ -22,8 +22,6 @@ public class MoveControls : MonoBehaviour
 
         var totalMovement = direction * moveSpeed * Time.fixedDeltaTime;
         
-        Debug.Log("totalMovement: " + totalMovement);
-        
         player.transform.position += totalMovement;
     }
 }
