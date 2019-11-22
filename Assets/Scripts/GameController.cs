@@ -1,19 +1,22 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class GameController : MonoBehaviour
 {
     public GameObject gameOverGameObject;
-    public Vector3 pacManStartPosition;
+    public Vector3    pacManStartPosition;
 
     private GameObject       _pacMan;
     private List<GameObject> _ghostList = new List<GameObject>();
+    public  Grid             grid;
+    public  Tilemap          tilemap;
 
     [HideInInspector] public ResourceLoader _loader;
 
     private void Start()
-    { 
+    {
         _loader = gameObject.AddComponent<ResourceLoader>();
         Reset();
         ShowGameOver(false);
@@ -33,6 +36,7 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
     public void Reset()
     {
         Destroy(_pacMan);
@@ -57,5 +61,12 @@ public class GameController : MonoBehaviour
         _ghostList.Add(newGhost);
         newGhost = _loader.LoadGhost(new Vector3(-3.12f, -1.68f, 0f));
         _ghostList.Add(newGhost);
+
+        foreach (var ghost in _ghostList)
+        {
+            ghost.GetComponent<Ghost>().grid    = grid;
+            ghost.GetComponent<Ghost>().tilemap = tilemap;
+            ghost.GetComponent<Ghost>().player = _pacMan;
+        }
     }
 }
