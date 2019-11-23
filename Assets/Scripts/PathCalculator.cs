@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PathCalculator : MonoBehaviour
+public class PathCalculator
 {
     private Tilemap walls;
 
     // Start is called before the first frame update
-    void Start()
+    public PathCalculator(Tilemap walls)
     {
-        walls = GameObject.FindWithTag("Walls").GetComponent<Tilemap>();
-        List<Vector3Int> path = CalculatePath(new Vector3Int(-20, -11, 0), new Vector3Int(-20, -5, 0));
-        foreach (Vector3Int step in path)
-        {
-            Debug.Log("Then go to: " + step.ToString());
-        }
+        this.walls = walls;
     }
 
     public List<Vector3Int> CalculatePath(Vector3Int start, Vector3Int target)
@@ -54,8 +49,8 @@ public class PathCalculator : MonoBehaviour
 
     private List<Vector3Int> GetPathByReversing(Node bestNode)
     {
-        Node currentNode = bestNode;
-        List<Vector3Int> result = new List<Vector3Int>();
+        Node             currentNode = bestNode;
+        List<Vector3Int> result      = new List<Vector3Int>();
 
         while (currentNode.Previous != null)
         {
@@ -68,8 +63,8 @@ public class PathCalculator : MonoBehaviour
         return result;
     }
 
-    private void HandleNeighbors(Node currentNode, HashSet<Node> neighbors, HashSet<Node> checkedNodes,
-        HashSet<Node> toCheckNodes)
+    private void HandleNeighbors(Node          currentNode, HashSet<Node> neighbors, HashSet<Node> checkedNodes,
+                                 HashSet<Node> toCheckNodes)
     {
         foreach (var neighbor in neighbors)
         {
@@ -87,7 +82,7 @@ public class PathCalculator : MonoBehaviour
 
             // Debug.Log("New neighbor: " + neighbor.Coords.ToString());
 
-            neighbor.Previous = currentNode;
+            neighbor.Previous    = currentNode;
             neighbor.CostToReach = currentNode.CostToReach + 1;
         }
     }
@@ -127,8 +122,8 @@ public class PathCalculator : MonoBehaviour
 
     private static Node FindBestNode(HashSet<Node> toCheckNodes)
     {
-        int bestScore = Int32.MaxValue;
-        Node bestNode = null;
+        int  bestScore = Int32.MaxValue;
+        Node bestNode  = null;
 
         foreach (Node currentNode in toCheckNodes)
         {
@@ -136,7 +131,7 @@ public class PathCalculator : MonoBehaviour
             if (currentScore < bestScore)
             {
                 bestScore = currentScore;
-                bestNode = currentNode;
+                bestNode  = currentNode;
             }
         }
 
@@ -145,9 +140,9 @@ public class PathCalculator : MonoBehaviour
 
     private class Node
     {
-        public Vector3Int Coords { get; }
-        public Node Previous { get; set; }
-        public int CostToReach { set; get; }
+        public Vector3Int Coords      { get; }
+        public Node       Previous    { get; set; }
+        public int        CostToReach { set; get; }
 
         public Node(Vector3Int coords)
         {

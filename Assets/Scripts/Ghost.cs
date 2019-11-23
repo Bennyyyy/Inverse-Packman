@@ -40,7 +40,7 @@ public class Ghost : MonoBehaviour
         var diffX = next.x - myPosition.x;
         var diffY = next.y - myPosition.y;
 
-        if (diffX == 0 && diffY == 0)
+        if (diffX == 0 && diffY == 0 && isInCenter)
             return MoveDirection.Idle;
 
         var direction = MoveDirection.Idle;

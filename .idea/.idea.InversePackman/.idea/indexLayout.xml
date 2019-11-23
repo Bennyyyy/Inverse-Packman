@@ -22,6 +22,7 @@
       <Path>UIElementsSchema</Path>
       <Path>gfx</Path>
       <Path>obj</Path>
+      <Path>sfx</Path>
     </explicitExcludes>
   </component>
 </project>
