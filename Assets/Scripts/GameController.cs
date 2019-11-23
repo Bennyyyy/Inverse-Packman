@@ -31,6 +31,13 @@ public class GameController : MonoBehaviour
         else
             InvertPacman.gameState = GameState.Play;
     }
+    
+    public void Update()
+    {
+        if (InvertPacman.gameState == GameState.GameOver)
+            if (Input.GetButton("Fire1"))
+                ResetGame();
+    }
 
     public void ResetGame()
     {
