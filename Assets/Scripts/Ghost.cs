@@ -110,10 +110,12 @@ public class Ghost : MonoBehaviour
         {
             case MoveDirection.Left:
                 spriteRenderer.flipX = true;
+                transform.Find("eyes").GetComponent<SpriteRenderer>().flipX = true;
                 //transform.localRotation = Quaternion.Euler(0, 0, 180);
                 break;
             case MoveDirection.Right:
                 spriteRenderer.flipX = false;
+                transform.Find("eyes").GetComponent<SpriteRenderer>().flipX = false;
                 //transform.localRotation = Quaternion.Euler(0, 0, 0);
                 break;
         }
