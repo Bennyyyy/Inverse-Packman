@@ -28,13 +28,14 @@ public class GameController : MonoBehaviour
         
         _loader = gameObject.AddComponent<ResourceLoader>();
         Reset();
-        ShowGameOver(false, "");
+        ShowGameOver(false, "", new Color(1.0f, 1.0f, 1.0f));
     }
 
-    public void ShowGameOver(bool show, string text)
+    public void ShowGameOver(bool show, string text, Color color)
     {
         gameOverGameObject.SetActive(show);
         gameOverText.text = text;
+        gameOverText.color = color;
 
         if (show)
             InvertPacman.gameState = GameState.GameOver;

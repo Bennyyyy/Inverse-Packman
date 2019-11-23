@@ -47,7 +47,7 @@ public class DotEatScript : MonoBehaviour
             Debug.Log("numDots: " + numDots);
 
             if (numDots == 0)
-                gameController.ShowGameOver(true, "PACMAN WINS");
+                gameController.ShowGameOver(true, "PACMAN WINS", new Color(1.0f, 1.0f, 0.0f));
         }
     }
 }
