@@ -6,25 +6,25 @@ using UnityEngine.UI;
 
 public class DotEatScript : MonoBehaviour
 {
-    public Text gameOverText;
+    public Text           gameOverText;
     public GameController gameController;
-    
+
     private Tilemap dotmap;
-    private int numDots;
-    
+    private int     numDots;
+
     // Start is called before the first frame update
     void Start()
     {
         dotmap = gameObject.GetComponent<Tilemap>();
-        
+
         // count the dots
         numDots = 0;
-        
-        for(int y=-dotmap.size.y; y<dotmap.size.y; y++)
-            for(int x=-dotmap.size.x; x<dotmap.size.x; x++)
-                if (dotmap.GetTile(new Vector3Int(x, y, 0)) != null)
-                    numDots++;
-                    
+
+        for (int y = -dotmap.size.y; y < dotmap.size.y; y++)
+        for (int x = -dotmap.size.x; x < dotmap.size.x; x++)
+            if (dotmap.GetTile(new Vector3Int(x, y, 0)) != null)
+                numDots++;
+
         Debug.Log("numDots: " + numDots);
     }
 
@@ -34,16 +34,17 @@ public class DotEatScript : MonoBehaviour
         GameObject player = GameObject.FindWithTag("Pacman");
 
         Grid grid = dotmap.layoutGrid;
-        
+
         if (dotmap.GetTile(grid.WorldToCell(player.transform.position)) != null)
         {
             dotmap.SetTile(grid.WorldToCell(player.transform.position), null);
             numDots--;
-            
+            ResourceLoader.LoadExplosion(player.transform.position);
+
             dotmap.GetComponent<AudioSource>().Play();
-            
+
             Debug.Log("numDots: " + numDots);
-            
+
             if (numDots == 0)
             {
                 gameOverText.text = "WELL DONE";

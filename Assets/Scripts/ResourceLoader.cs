@@ -29,6 +29,14 @@ public class ResourceLoader : MonoBehaviour
         gameObj.GetComponent<SpriteRenderer>().color = getNextColor();
         return gameObj;
     }
+
+    public static GameObject LoadExplosion(Vector3 position)
+    {
+        var gameObj = GameObject.Instantiate(Resources.Load<GameObject>("ExplosionEffect"));
+        gameObj.transform.position = position;
+        gameObj.SetActive(true);
+        return gameObj;
+    }
     
     private Color getNextColor()
     {
