@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ghost
   - Pacman
+  - Ghost
+  - Walls
   layers:
   - Default
   - TransparentFX
@@ -15,10 +16,10 @@ TagManager:
   - UI
   - 
   - 
-  - Pacman
-  - Ghosts
-  - Walls
-  - Pills
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
