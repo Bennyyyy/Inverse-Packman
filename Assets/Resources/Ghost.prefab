@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 5962829778071473349}
   - component: {fileID: 1041070280926736503}
   - component: {fileID: 1193004781801589416}
+  - component: {fileID: 5855822117611327343}
   m_Layer: 9
   m_Name: Ghost
   m_TagString: Ghost
@@ -276,3 +277,19 @@ MonoBehaviour:
   tileMap: {fileID: 0}
   gridMap: {fileID: 0}
   ghost: {fileID: 5962829778071473349}
+--- !u!58 &5855822117611327343
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978231257137568386}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
