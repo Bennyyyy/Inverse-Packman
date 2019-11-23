@@ -28,7 +28,7 @@ public class IPointerHandler : MonoBehaviour
         try
         {
             startPositionVector3   = Input.mousePosition;
-            currentPositionVector3 = transform.parent.position;
+            currentPositionVector3 = transform.position;
 
             var startGridPos = gridMap.WorldToCell(currentPositionVector3);
             var worldPos     = Camera.main.ScreenToWorldPoint(startPositionVector3);
@@ -58,7 +58,7 @@ public class IPointerHandler : MonoBehaviour
     void Start()
     {
         _pathCalculator = new PathCalculator(GameObject.FindWithTag("Walls").GetComponent<Tilemap>());
-        tileMap         = transform.GetComponentInParent<Ghost>().tilemap;
-        gridMap         = transform.GetComponentInParent<Ghost>().grid;
+        tileMap         = transform.GetComponent<Ghost>().tilemap;
+        gridMap         = transform.GetComponent<Ghost>().grid;
     }
 }
