@@ -120,6 +120,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!156049354 &194169482 stripped
+Grid:
+  m_CorrespondingSourceObject: {fileID: 1916655249038401279, guid: 2093d50c63f5b182dab3e45f4fb9f1fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1962399308}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1839735485 &288693626 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 1916655249615198146, guid: 2093d50c63f5b182dab3e45f4fb9f1fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1962399308}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &343202979
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +239,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverGameObject: {fileID: 1277897391}
   pacManStartPosition: {x: 0.08, y: 0.08, z: 0}
+  grid: {fileID: 194169482}
+  tilemap: {fileID: 288693626}
   _loader: {fileID: 0}
 --- !u!20 &519420031
 Camera:

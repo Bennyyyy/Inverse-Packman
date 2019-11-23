@@ -44,27 +44,20 @@ public class Ghost : MonoBehaviour
 
         var direction = MoveDirection.Idle;
 
-        if (Math.Abs(diffX) > Math.Abs(diffY))
-        {
-            if (diffX > 0)
-                direction = MoveDirection.Right;
-            else
-                direction = MoveDirection.Left;
-
-
-            var tile = GetTileForDirection(myPosition, direction);
-
-            if (tile != null)
-                direction = MoveDirection.Idle;
-            else
-                return direction;
-        }
-
-
-        if (diffY > 0)
-            direction = MoveDirection.Up;
+        if (diffX > 0)
+            direction = MoveDirection.Right;
         else
-            direction = MoveDirection.Down;
+            direction = MoveDirection.Left;
+
+        var tile = GetTileForDirection(myPosition, direction);
+
+        if (tile != null)
+        {
+            if (diffY > 0)
+                direction = MoveDirection.Up;
+            else
+                direction = MoveDirection.Down;
+        }
 
         var tile2 = GetTileForDirection(myPosition, direction);
 
