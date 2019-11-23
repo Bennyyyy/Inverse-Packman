@@ -276,3 +276,4 @@ MonoBehaviour:
   xOffset: 0.08
   yOffset: 0.08
   drawWidth: 0.05
+  material: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}

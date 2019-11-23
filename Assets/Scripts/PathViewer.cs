@@ -14,6 +14,7 @@ public class PathViewer : MonoBehaviour
     public float            xOffset    = 0.08f;
     public float            yOffset    = 0.08f;
     public float            drawWidth  = 0.05f;
+    public Material material;
 
     private Grid         _grid;
     private LineRenderer _lineRenderer;
@@ -46,11 +47,17 @@ public class PathViewer : MonoBehaviour
         if (_lineRenderer == null)
         {
             _lineRenderer = gameObject.AddComponent<LineRenderer>();
+            
+            _lineRenderer.startWidth = drawWidth;
+            _lineRenderer.endWidth   = drawWidth;
+            _lineRenderer.material = material;
+            var color = _ghost.GetComponent<SpriteRenderer>().color;
+            _lineRenderer.startColor = color;
+            _lineRenderer.endColor = color;
         }
 
         _lineRenderer.positionCount = path.Count;
-        _lineRenderer.startWidth    = drawWidth;
-        _lineRenderer.endWidth      = drawWidth;
+        
 
 
         for (int i = 0; i < path.Count; i++)
