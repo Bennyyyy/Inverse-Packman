@@ -11,7 +11,11 @@ public class PathCalculator : MonoBehaviour
     void Start()
     {
         walls = GameObject.FindWithTag("Walls").GetComponent<Tilemap>();
-        CalculatePath(new Vector3Int(-24, -13, 0), new Vector3Int(24, 13, 0));
+        List<Vector3Int> path = CalculatePath(new Vector3Int(-20, -11, 0), new Vector3Int(-20, -5, 0));
+        foreach (Vector3Int step in path)
+        {
+            Debug.Log("Then go to: " + step.ToString());
+        }
     }
 
     public List<Vector3Int> CalculatePath(Vector3Int start, Vector3Int target)
@@ -28,13 +32,14 @@ public class PathCalculator : MonoBehaviour
         // As long as there are nodes which could lead to the target...
         while (toCheckNodes.Count > 0)
         {
-            Debug.Log("Nodes left: " + toCheckNodes.Count);
+            // Debug.Log("Nodes left: " + toCheckNodes.Count);
             Node bestNode = FindBestNode(toCheckNodes);
 
             if (bestNode.Coords == target)
             {
                 // path found!
-                // TODO: Return path
+                Debug.Log("Path found!");
+                return GetPathByReversing(bestNode);
             }
 
             HashSet<Node> neighbors = GetNeighbors(bestNode.Coords);
@@ -45,6 +50,22 @@ public class PathCalculator : MonoBehaviour
         }
 
         throw new Exception("No path to target!");
+    }
+
+    private List<Vector3Int> GetPathByReversing(Node bestNode)
+    {
+        Node currentNode = bestNode;
+        List<Vector3Int> result = new List<Vector3Int>();
+
+        while (currentNode.Previous != null)
+        {
+            result.Add(currentNode.Coords);
+            currentNode = currentNode.Previous;
+        }
+
+        result.Reverse();
+
+        return result;
     }
 
     private void HandleNeighbors(Node currentNode, HashSet<Node> neighbors, HashSet<Node> checkedNodes,
@@ -64,7 +85,7 @@ public class PathCalculator : MonoBehaviour
                 toCheckNodes.Add(neighbor);
             }
 
-            Debug.Log("New neighbor: " + neighbor.Coords.ToString());
+            // Debug.Log("New neighbor: " + neighbor.Coords.ToString());
 
             neighbor.Previous = currentNode;
             neighbor.CostToReach = currentNode.CostToReach + 1;
@@ -83,21 +104,13 @@ public class PathCalculator : MonoBehaviour
 
         foreach (var possibleNeighbor in possibleNeighbors)
         {
-            Debug.Log("Possible Neighbot: " + possibleNeighbor.ToString());
+            // Debug.Log("Possible Neighbor: " + possibleNeighbor.ToString());
             TileBase tile = walls.GetTile(possibleNeighbor);
-            
-            // TODO: Sth. broken here. All tiles are null?
+
             if (tile == null)
             {
-                Debug.Log("--> Tile: is null.");
-            }
-            else
-            {
-                if (tile.name != "wall")
-                {
-                    Debug.Log("--> Tile is not null.");
-                    results.Add(new Node(possibleNeighbor));
-                }
+                // Debug.Log("--> Tile: is null. I.e there is no wall here.");
+                results.Add(new Node(possibleNeighbor));
             }
         }
 
