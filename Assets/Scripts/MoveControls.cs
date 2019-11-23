@@ -7,6 +7,8 @@ public class MoveControls : MonoBehaviour
     public GameObject     player;
     public float          moveSpeed        = 1.0f;
     public MoveDirection  currentDirection = MoveDirection.Idle;
+    
+    public const float    DEADZONE         = 0.4f;
 
     private void Start()
     {
@@ -21,14 +23,14 @@ public class MoveControls : MonoBehaviour
 
         var pressedDirection = MoveDirection.Idle;
 
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetAxis("Vertical") > DEADZONE)
             pressedDirection = MoveDirection.Up;
-        else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetAxis("Vertical") < -DEADZONE)
             pressedDirection = MoveDirection.Down;
 
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetAxis("Horizontal") < -DEADZONE)
             pressedDirection = MoveDirection.Left;
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetAxis("Horizontal") > DEADZONE)
             pressedDirection = MoveDirection.Right;
 
         if (pressedDirection != MoveDirection.Idle)
