@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -31,27 +32,34 @@ public class IPointerHandler : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        startPositionVector3   = Input.mousePosition;
-        currentPositionVector3 = transform.position;
-
-        var startGridPos = gridMap.WorldToCell(currentPositionVector3);
-        var worldPos     = Camera.main.ScreenToWorldPoint(startPositionVector3);
-        var gridPos      = gridMap.WorldToCell(worldPos);
-
-        Debug.Log("Current Mouse on Grid " + gridPos);
-        Debug.Log("Ghost start Point " + startGridPos);
-
-        var pathAsString = "";
-
-        var path = _pathCalculator.CalculatePath(startGridPos, gridPos);
-        foreach (var step in path)
+        try
         {
-            pathAsString += step.ToString();
+            startPositionVector3   = Input.mousePosition;
+            currentPositionVector3 = transform.position;
+
+            var startGridPos = gridMap.WorldToCell(currentPositionVector3);
+            var worldPos     = Camera.main.ScreenToWorldPoint(startPositionVector3);
+            var gridPos      = gridMap.WorldToCell(worldPos);
+
+            Debug.Log("Current Mouse on Grid " + gridPos);
+            Debug.Log("Ghost start Point " + startGridPos);
+
+            var pathAsString = "";
+
+            var path = _pathCalculator.CalculatePath(startGridPos, gridPos);
+            foreach (var step in path)
+            {
+                pathAsString += step.ToString();
+            }
+
+            ghost.movementPath = path;
+
+            Debug.Log(ghost.movementPath.ToString());
         }
-
-        ghost.movementPath = path;
-
-        Debug.Log(ghost.movementPath.ToString());
+        catch (Exception ignore)
+        {
+            // nothing to do
+        }
     }
 
     void Start()
