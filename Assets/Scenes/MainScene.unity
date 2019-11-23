@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverGameObject: {fileID: 1277897391}
+  gameOverText: {fileID: 1131399828}
   pacManStartPosition: {x: 0.08, y: 0.08, z: 0}
   grid: {fileID: 194169482}
   tilemap: {fileID: 288693626}
@@ -5727,6 +5728,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 1227376493, guid: 2093d50c63f5b182dab3e45f4fb9f1fc, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 519420030}
+    - target: {fileID: 1227376493, guid: 2093d50c63f5b182dab3e45f4fb9f1fc, type: 3}
+      propertyPath: gameOverText
+      value: 
+      objectReference: {fileID: 1131399828}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2093d50c63f5b182dab3e45f4fb9f1fc, type: 3}
 --- !u!1 &2005382181
