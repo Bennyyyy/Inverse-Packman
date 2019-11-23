@@ -10,6 +10,8 @@ public class DotEatScript : MonoBehaviour
     private Tilemap dotmap;
     private int     numDots;
 
+    private const int SCORE_PER_DOT = 10;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,8 @@ public class DotEatScript : MonoBehaviour
             dotmap.SetTile(grid.WorldToCell(player.transform.position), null);
             numDots--;
             //ResourceLoader.LoadExplosion(player.transform.position);
+
+            gameController.score += SCORE_PER_DOT;
 
             dotmap.GetComponent<AudioSource>().Play();
 
