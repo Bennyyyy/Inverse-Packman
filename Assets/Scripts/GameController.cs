@@ -12,8 +12,12 @@ public class GameController : MonoBehaviour
 
     private GameObject       _pacMan;
     private List<GameObject> _ghostList = new List<GameObject>();
+    private Text scoreText = GameObject.FindWithTag("ScoreText").GetComponent<Text>();
+    
     public  Grid             grid;
     public  Tilemap          tilemap;
+
+    public int score = 0;
 
     [HideInInspector] public ResourceLoader _loader;
 
@@ -40,6 +44,8 @@ public class GameController : MonoBehaviour
         if (InvertPacman.gameState == GameState.GameOver)
             if (Input.GetButton("Fire1"))
                 ResetGame();
+
+        scoreText.text = "Score:\n" + score;
     }
 
     public void ResetGame()
