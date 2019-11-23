@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class Ghost : MonoBehaviour
 {
-    public float            moveSpeed        = 1.0f;
+    public float            moveSpeed        = 0.5f;
     public MoveDirection    currentDirection = MoveDirection.Idle;
     public List<Vector3Int> movementPath     = new List<Vector3Int>();
     public Tilemap          tilemap;
