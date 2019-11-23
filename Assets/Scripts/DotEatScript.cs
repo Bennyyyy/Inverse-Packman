@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -39,7 +37,7 @@ public class DotEatScript : MonoBehaviour
         {
             dotmap.SetTile(grid.WorldToCell(player.transform.position), null);
             numDots--;
-            ResourceLoader.LoadExplosion(player.transform.position);
+            //ResourceLoader.LoadExplosion(player.transform.position);
 
             dotmap.GetComponent<AudioSource>().Play();
 
