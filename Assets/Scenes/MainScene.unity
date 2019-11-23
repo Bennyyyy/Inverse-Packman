@@ -5723,6 +5723,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Walls
       objectReference: {fileID: 0}
+    - target: {fileID: 1227376493, guid: 2093d50c63f5b182dab3e45f4fb9f1fc, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 519420030}
     - target: {fileID: 1916655249615198147, guid: 2093d50c63f5b182dab3e45f4fb9f1fc,
         type: 3}
       propertyPath: m_SortingOrder
