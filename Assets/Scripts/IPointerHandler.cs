@@ -45,7 +45,7 @@ public class IPointerHandler : MonoBehaviour
                 pathAsString += step.ToString();
             }
 
-            ghost.movementPath = path;
+            ghost.SetMovementPath(path);
 
             Debug.Log(ghost.movementPath.ToString());
         }

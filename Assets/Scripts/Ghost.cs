@@ -12,6 +12,7 @@ public class Ghost : MonoBehaviour
     public Grid             grid;
     public SpriteRenderer   spriteRenderer;
     public GameObject       player;
+    public List<Vector3Int> newMovementPath     = null;
 
     private void FixedUpdate()
     {
@@ -23,6 +24,17 @@ public class Ghost : MonoBehaviour
         var totalMovement = currentDirection.AsVector() * moveSpeed * Time.fixedDeltaTime;
 
         transform.position += totalMovement;
+    }
+    
+    public void SetMovementPath(List<Vector3Int> path)
+    {
+        newMovementPath = path;
+        
+        if (movementPath.Count == 0)
+        {
+            movementPath = newMovementPath;
+            newMovementPath = null;
+        }
     }
 
     private MoveDirection GetNextDirection()
@@ -38,6 +50,12 @@ public class Ghost : MonoBehaviour
         {
             PopNext();
             next = GetNext();
+            
+            if (newMovementPath != null)
+            {
+                movementPath = newMovementPath;
+                newMovementPath = null;
+            }
         }
 
         var diffX = next.x - myPosition.x;
