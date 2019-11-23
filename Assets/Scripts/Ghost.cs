@@ -29,8 +29,9 @@ public class Ghost : MonoBehaviour
     {
         var myPosition = grid.WorldToCell(transform.position);
         var next       = GetNext();
+        var isInCenter = Equals(transform.position, grid.GetCellCenterWorld(myPosition));
 
-        if (myPosition.Equals(next))
+        if (Equals(myPosition, next) && isInCenter)
         {
             PopNext();
             next = GetNext();
@@ -46,20 +47,25 @@ public class Ghost : MonoBehaviour
 
         if (diffX > 0)
             direction = MoveDirection.Right;
-        else
+        else if (diffX < 0)
             direction = MoveDirection.Left;
 
         var tile = GetTileForDirection(myPosition, direction);
 
-        if (tile != null)
+        if (tile != null || direction == MoveDirection.Idle)
         {
             if (diffY > 0)
                 direction = MoveDirection.Up;
-            else
+            else if (diffY < 0)
                 direction = MoveDirection.Down;
         }
 
-        var tile2 = GetTileForDirection(myPosition, direction);
+        var tile2            = GetTileForDirection(myPosition, direction);
+        var directionChanged = direction != currentDirection;
+        var wasMoving        = currentDirection != MoveDirection.Idle;
+
+        if (wasMoving && directionChanged && !isInCenter)
+            direction = currentDirection;
 
         if (tile2 != null)
             direction = MoveDirection.Idle;
@@ -111,5 +117,15 @@ public class Ghost : MonoBehaviour
                 //transform.localRotation = Quaternion.Euler(0, 0, 0);
                 break;
         }
+    }
+
+    private static bool Equals(Vector3Int v1, Vector3Int v2)
+    {
+        return v1.x == v2.x && v1.y == v2.y;
+    }
+
+    private static bool Equals(Vector3 v1, Vector3 v2)
+    {
+        return Math.Abs(v1.x - v2.x) < 0.01f && Math.Abs(v1.y - v2.y) < 0.01f;
     }
 }
