@@ -2,10 +2,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     public GameObject gameOverGameObject;
+    public Text       gameOverText;
     public Vector3    pacManStartPosition;
 
     private GameObject       _pacMan;
@@ -19,12 +21,13 @@ public class GameController : MonoBehaviour
     {
         _loader = gameObject.AddComponent<ResourceLoader>();
         Reset();
-        ShowGameOver(false);
+        ShowGameOver(false, "");
     }
 
-    public void ShowGameOver(bool show)
+    public void ShowGameOver(bool show, string text)
     {
         gameOverGameObject.SetActive(show);
+        gameOverText.text = text;
 
         if (show)
             InvertPacman.gameState = GameState.GameOver;

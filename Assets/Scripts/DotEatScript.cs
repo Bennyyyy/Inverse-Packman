@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class DotEatScript : MonoBehaviour
 {
-    public Text           gameOverText;
     public GameController gameController;
 
     private Tilemap dotmap;
@@ -44,10 +43,7 @@ public class DotEatScript : MonoBehaviour
             Debug.Log("numDots: " + numDots);
 
             if (numDots == 0)
-            {
-                gameOverText.text = "WELL DONE";
-                gameController.ShowGameOver(true);
-            }
+                gameController.ShowGameOver(true, "PACMAN WINS");
         }
     }
 }

@@ -64,7 +64,7 @@ public class MoveControls : MonoBehaviour
     {
         if (other.gameObject.tag == "Ghost")
         {
-            gameController.ShowGameOver(true);
+            gameController.ShowGameOver(true, "GHOSTS WIN");
             player.GetComponent<AudioSource>().Play();
         }
     }
