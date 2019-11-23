@@ -63,7 +63,10 @@ public class MoveControls : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Ghost")
+        {
             gameController.ShowGameOver(true);
+            player.GetComponent<AudioSource>().Play();
+        }
     }
 }
 

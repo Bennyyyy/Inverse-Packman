@@ -40,6 +40,8 @@ public class DotEatScript : MonoBehaviour
             dotmap.SetTile(grid.WorldToCell(player.transform.position), null);
             numDots--;
             
+            dotmap.GetComponent<AudioSource>().Play();
+            
             Debug.Log("numDots: " + numDots);
             
             if (numDots == 0)
