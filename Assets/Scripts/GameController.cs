@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
 
     private GameObject       _pacMan;
     private List<GameObject> _ghostList = new List<GameObject>();
-    private Text scoreText = GameObject.FindWithTag("ScoreText").GetComponent<Text>();
+    private Text scoreText;
     
     public  Grid             grid;
     public  Tilemap          tilemap;
@@ -23,6 +23,9 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        scoreText = GameObject.FindWithTag("ScoreText").GetComponent<Text>();
+        
+        
         _loader = gameObject.AddComponent<ResourceLoader>();
         Reset();
         ShowGameOver(false, "");
