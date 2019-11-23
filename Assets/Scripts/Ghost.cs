@@ -27,6 +27,9 @@ public class Ghost : MonoBehaviour
 
     private MoveDirection GetNextDirection()
     {
+        if (!HasNext())
+            return MoveDirection.Idle;
+        
         var myPosition = grid.WorldToCell(transform.position);
         var next       = GetNext();
         var isInCenter = Equals(transform.position, grid.GetCellCenterWorld(myPosition));
@@ -97,6 +100,11 @@ public class Ghost : MonoBehaviour
     private void PopNext()
     {
         movementPath.RemoveAt(0);
+    }
+
+    private bool HasNext()
+    {
+        return movementPath.Count > 0;
     }
 
     private Vector3Int GetNext()
